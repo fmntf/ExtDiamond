@@ -75,6 +75,7 @@ Ext.onReady(function()
 	});
 
 	var window = new Ext.Window({
+		cls: 'firewall-window',
 		title: 'My Firewall',
 		y: 150,
 		items: [
