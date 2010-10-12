@@ -76,6 +76,7 @@ Ext.onReady(function()
 
 	var window = new Ext.Window({
 		title: 'My Firewall',
+		y: 150,
 		items: [
 			grid
 		]
