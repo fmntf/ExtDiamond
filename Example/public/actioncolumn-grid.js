@@ -45,7 +45,8 @@ Ext.onReady(function()
 			{
 				id: 'description',
 				header : 'Description',
-				dataIndex: 'description'
+				dataIndex: 'description',
+				width: 250
 			},
 			{
 				header: 'Action',
