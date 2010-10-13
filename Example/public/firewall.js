@@ -55,6 +55,7 @@ Ext.onReady(function()
 				items: [
 					{
 						icon: 'resources/fam/cross.gif',
+						iconCls: 'firewall-deny',
 						tooltip: 'Deny',
 						handler: function(firewall, rowIndex, colIndex) {
 							var record = firewall.getStore().getAt(rowIndex);
@@ -63,6 +64,7 @@ Ext.onReady(function()
 					},
 					{
 						icon: 'resources/fam/accept.png',
+						iconCls: 'firewall-accept',
 						tooltip: 'Accept',
 						handler: function(firewall, rowIndex, colIndex) {
 							var record = firewall.getStore().getAt(rowIndex);
