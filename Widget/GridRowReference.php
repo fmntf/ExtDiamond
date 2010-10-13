@@ -40,7 +40,7 @@ class ExtDiamond_Widget_GridRowReference extends ExtDiamond_Proxy_DomReference
 	 */
 	public function isSelected()
 	{
-		return in_array('x-grid3-row-selected', $this->classList->getProperties());
+		return (bool) strstr($this->className, 'x-grid3-row-selected');
 	}
 
 	/**
