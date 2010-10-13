@@ -44,17 +44,22 @@ class ExtDiamond_Widget_GridRowReference extends ExtDiamond_Proxy_DomReference
 	}
 
 	/**
-	 * Get the text contained in the cell at the specified column index.
-	 *
-	 * @param int $colIndex Zero based index
-	 * @return string
+	 * Get the cell at the specified index.
+	 * 
+	 * @param int $colIndex Zero based colum index
+	 * @return ExtDiamond_Widget_GridRowReference
 	 */
-	public function getTextOfCell($colIndex)
+	public function getCell($colIndex)
 	{
 		$root = "window.Ext.query('{$this->startPoint} td')[$colIndex]";
-		$col = "window.Ext.query('div', $root)[0].innerHTML";
+		$col = "window.Ext.query('div', $root)[0]";
 
-		return $this->selenium->getEval($col);
+		$js =  "if ($col.id == '') {
+					$col.id = window.Ext.id();
+				}";
+		$id = $this->selenium->getEval($js);
+
+		return new ExtDiamond_Widget_GridCellReference($this->selenium, '#' . $id);
 	}
 
 }

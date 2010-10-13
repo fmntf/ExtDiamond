@@ -43,7 +43,9 @@ class ExtDiamond_Widget_GridReference extends ExtDiamond_Proxy_ExtReference
 	 */
 	public function getRow($i)
 	{
-		$js = "window.Ext.getCmp('{$this->id}').view.getRow($i).id = window.Ext.id();";
+		$js =  "if (window.Ext.getCmp('{$this->id}').view.getRow($i).id == '') {
+					window.Ext.getCmp('{$this->id}').view.getRow($i).id = window.Ext.id();
+				}";
 		$id = $this->selenium->getEval($js);
 
 		return new ExtDiamond_Widget_GridRowReference($this->selenium, '#' . $id);
