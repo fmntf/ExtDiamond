@@ -55,7 +55,7 @@ class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 		$class = 'ExtDiamond_Widget_' . $type . 'Reference';
 
 		if (class_exists($class)) {
-			return new $class($this->selenium, $this->startPoint, $this->internalPath);
+			return new $class($this->selenium, '#' . $this->id);
 		}
 
 		throw new Exception("Widget `$type` not found.");
