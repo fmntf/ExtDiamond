@@ -3,6 +3,7 @@ Ext.onReady(function()
 
 	var form = new Ext.FormPanel({
 		title: 'View Logs',
+		cls: 'logviewer',
 		padding: 10,
 		width: 330,
 		items: [
