@@ -33,4 +33,27 @@ class ExtDiamond_Proxy_DomReference extends ExtDiamond_Proxy_Reference
 		}
 	}
 
+	/**
+	 * Get the (ID) reference to an elment, which can be found via CSS selector.
+	 * 
+	 * @param string $cssSelector
+	 * @param int $index Which element to get in all the matches
+	 * @return string|null ID of found element. Null if nothing found.
+	 */
+	public function getRefereceTo($cssSelector, $index=0)
+	{
+		$root = "window.Ext.query('{$this->startPoint}')[0]";
+		$element = "window.Ext.query('$cssSelector', $root)[$index]";
+
+		$isUndefined = $this->selenium->getEval("($element === undefined)");
+		if ($isUndefined == 'true') {
+			return false;
+		}
+
+		$js =  "if ($element.id == '') {
+					$element.id = window.Ext.id();
+				}";
+		return $this->selenium->getEval($js);
+	}
+
 }
