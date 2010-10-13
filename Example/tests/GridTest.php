@@ -43,19 +43,34 @@ class GridTest extends ExtDiamond_TestCase
 		$this->assertTrue($grid->store->totalLength > 0,
 			'The grid store is empty. Empty fixtures?');
 
-		$firstRow = $grid->getRow(3);
-		$this->assertApplicationNameIsValid($firstRow->getTextOfCell(0));
+		$secondRow = $grid->getRow(1);
+		$this->assertApplicationNameIsValid($secondRow->getCell(0)->getText(0));
 	}
 
-	protected function assertApplicationNameIsValid($applicationName)
+	public function testApplicationRowHasAcceptAndDenyButtons()
+	{
+		$grid = $this->getComponentByClass('firewall-window')
+					 ->getItemAt(0)->handleAs('Grid');
+
+		$cell = $grid->getRow(1)->getCell(2);
+
+		$acceptBtn = $cell->getRefereceTo('.firewall-accept');
+		$this->assertNotNull($acceptBtn, 'Accept button not found');
+
+		$acceptBtn = $cell->getRefereceTo('.firewall-deny');
+		$this->assertNotNull($acceptBtn, 'Deny button not found');
+	}
+
+
+	/* custom assertions */
+
+	private function assertApplicationNameIsValid($applicationName)
 	{
 		preg_match('/\.exe|\.dll|\.bin/', $applicationName, $matches);
 
 		if (count($matches) == 0) {
-			$this->fail('Executable extension not found in application name');
+			$this->fail('Executable extension not found in application ' . $applicationName);
 		}
 	}
-
-	
 
 }
