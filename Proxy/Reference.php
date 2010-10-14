@@ -199,7 +199,7 @@ abstract class ExtDiamond_Proxy_Reference
 	 */
 	public function __call($f, array $arguments)
 	{
-		$args = implode(', ', $arguments);
+		$args = $this->getArgumentsAsString($arguments);
 		$unique = 'ExtDiamond.fcalls.' . $this->getId();
 
 		$js = "window.$unique = " . $this->getPath() . ".$f($args);
@@ -221,6 +221,52 @@ abstract class ExtDiamond_Proxy_Reference
 		} else {
 			return $value;
 		}
+	}
+
+	/**
+	 * Transforms an array of arguments in a string.
+	 * Strings will be escaped, unless wrapped by an ExtDiamond_UnescapedArgument
+	 * object.
+	 *
+	 * @param array $arguments
+	 * @return string
+	 */
+	protected function getArgumentsAsString(array $arguments)
+	{
+		$args = array();
+
+		foreach ($arguments as $argument) {
+
+			if ($argument instanceof ExtDiamond_UnescapedArgument) {
+				$arg = $argument;
+			} else {
+				switch (gettype($argument)) {
+					case 'boolean':
+						$arg = ($argument===true) ? "true" : "false";
+						break;
+
+					case 'integer':
+					case 'double':
+						$arg = $argument;
+						break;
+
+					case 'string':
+						$arg = "'$argument'";
+						break;
+
+					case 'NULL':
+						$arg = "null";
+						break;
+
+					default:
+						throw new Exception('You cannot pass non-scalar values to functions.');
+				}
+			}
+
+			$args[] = $arg;
+		}
+
+		return implode(', ', $args);
 	}
 
 	/**
