@@ -54,10 +54,10 @@ class GridTest extends ExtDiamond_TestCase
 
 		$cell = $grid->getRow(1)->getCell(2);
 
-		$acceptBtn = $cell->getRefereceTo('.firewall-accept');
+		$acceptBtn = $cell->getReferenceTo('.firewall-accept');
 		$this->assertNotNull($acceptBtn, 'Accept button not found');
 
-		$acceptBtn = $cell->getRefereceTo('.firewall-deny');
+		$acceptBtn = $cell->getReferenceTo('.firewall-deny');
 		$this->assertNotNull($acceptBtn, 'Deny button not found');
 	}
 

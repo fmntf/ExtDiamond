@@ -40,7 +40,7 @@ class ExtDiamond_Proxy_DomReference extends ExtDiamond_Proxy_Reference
 	 * @param int $index Which element to get in all the matches
 	 * @return string|null ID of found element. Null if nothing found.
 	 */
-	public function getRefereceTo($cssSelector, $index=0)
+	public function getReferenceTo($cssSelector, $index=0)
 	{
 		$root = "window.Ext.query('{$this->startPoint}')[0]";
 		$element = "window.Ext.query('$cssSelector', $root)[$index]";
