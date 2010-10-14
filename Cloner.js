@@ -62,3 +62,5 @@ window.ExtDiamond.fireEvent = function(obj, evt)
 }
 
 window.ExtDiamond.fcalls = {};
+
+window.ExtDiamond.tmp = {};
