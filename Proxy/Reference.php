@@ -209,7 +209,7 @@ abstract class ExtDiamond_Proxy_Reference
 		$isPrimitive = $this->selenium->getEval($js);
 
 		if ($isPrimitive == 'false') {
-			return new ExtDiamond_Proxy_VarReference($this->selenium, $unique);
+			return new ExtDiamond_Proxy_VarReference($this->selenium, 'window.' . $unique);
 		}
 
 		$js = "window.Ext.isBoolean(window.$unique);";
