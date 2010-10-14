@@ -54,11 +54,35 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 	 *
 	 * @see http://dev.sencha.com/deploy/dev/docs/output/Ext.Component.html#Ext.Component-cls
 	 * @param string $class CSS class
-	 * @return ExtDiamond_Proxy_Reference
+	 * @return ExtDiamond_Proxy_ExtReference
 	 */
 	protected function getComponentByClass($class)
 	{
 		return new ExtDiamond_Proxy_ExtReference($this, ".$class");
+	}
+
+	/**
+	 * Get a DOM reference by the given CSS selector.
+	 * Tip: once you get a DOM reference, you can refine your search using the
+	 * getReferenceTo() method.
+	 *
+	 * @param string $css
+	 * @return ExtDiamond_Proxy_DomReference
+	 */
+	protected function getDomBySelector($css)
+	{
+		return new ExtDiamond_Proxy_DomReference($this, $css);
+	}
+
+	/**
+	 * Get any variabile of the client by name
+	 *
+	 * @param string $name
+	 * @return ExtDiamond_Proxy_VarReference
+	 */
+	protected function getVariableByName($name)
+	{
+		return new ExtDiamond_Proxy_VarReference($this, 'window.' . $name);
 	}
 
 	/**
