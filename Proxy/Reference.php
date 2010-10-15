@@ -107,7 +107,7 @@ abstract class ExtDiamond_Proxy_Reference
 
 		if (!array_key_exists($name, $this->properties)) {
 			if ($safe) return null;
-			throw new Exception("Property '$name' not found!");
+			throw new ExtDiamond_Exception_Property("Property '$name' not found!");
 		}
 
 		$value = $this->properties[$name];
@@ -116,7 +116,7 @@ abstract class ExtDiamond_Proxy_Reference
 		}
 
 		if ($value[0] == 'function') {
-			throw new Exception("Cannot get a function as property.");
+			throw new ExtDiamond_Exception_Function("Cannot get a function as property.");
 		}
 
 		$class = get_class($this);
@@ -159,7 +159,7 @@ abstract class ExtDiamond_Proxy_Reference
 
 		$properties = json_decode($result, true);
 		if ($properties === null) {
-			throw new Exception('Could not get object properties! Check the path used to reach the object.');
+			throw new ExtDiamond_Exception_Property('Could not get object properties! Check the path used to reach the object.');
 		}
 
 		$this->properties = $properties;
@@ -259,7 +259,7 @@ abstract class ExtDiamond_Proxy_Reference
 						break;
 
 					default:
-						throw new Exception('You cannot pass non-scalar values to functions.');
+						throw new ExtDiamond_Exception_Function('You cannot pass non-scalar values to functions.');
 				}
 			}
 
@@ -278,6 +278,19 @@ abstract class ExtDiamond_Proxy_Reference
 	{
 		$gen = explode('ext-', $this->selenium->getEval('window.Ext.id();'));
 		return $gen[1];
+	}
+
+	/**
+	 * Access the 'i' item of the array.
+	 *
+	 * @param int $i
+	 * @return ExtDiamond_Proxy_Reference
+	 */
+	public function getArrayItemAt($i)
+	{
+		$class = get_class($this);
+
+		return new $class($this->selenium, $this->startPoint, $this->internalPath . "[$i]");
 	}
 
 }

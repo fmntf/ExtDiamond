@@ -33,6 +33,12 @@ class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 		}
 	}
 
+	/**
+	 * Get the i-th item of the component. Shorthand for items.items[i]
+	 *
+	 * @param int $i
+	 * @return ExtDiamond_Proxy_Reference
+	 */
 	public function getItemAt($i)
 	{
 		$class = get_class($this);
@@ -58,7 +64,7 @@ class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 			return new $class($this->selenium, '#' . $this->id);
 		}
 
-		throw new Exception("Widget `$type` not found.");
+		throw new ExtDiamond_Exception_WidgetNotFound("Widget `$type` not found.");
 	}
 
 }
