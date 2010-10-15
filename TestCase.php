@@ -33,6 +33,13 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected $url;
 
 	/**
+	 * List of namespaces where to find widgets.
+	 * 
+	 * @var array
+	 */
+	protected $widgetNamespaces = array();
+
+	/**
 	 * Set default options
 	 */
 	public function setUp()
@@ -124,6 +131,26 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 	{
 		$js = file_get_contents(dirname(__FILE__) . '/Client.js');
 		$this->getEval($js);
+	}
+
+	/**
+	 * Adds a new namespace in the list of widgets paths.
+	 *
+	 * @param string $namespace NS with trailing underscore, like: Your_Path_
+	 */
+	public function addWidgetNamespace($namespace)
+	{
+		$this->widgetNamespaces[] = $namespace;
+	}
+
+	/**
+	 * Gets all namespaces where to find widgets.
+	 * 
+	 * @return array
+	 */
+	public function getWidgetNamespaces()
+	{
+		return $this->widgetNamespaces;
 	}
 
 }
