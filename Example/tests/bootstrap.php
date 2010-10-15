@@ -19,10 +19,6 @@
  */
 function autoloader($class)
 {
-	if ($class == 'Tests') {
-		throw new Exception('aa');
-	}
-
 	$path = dirname(__FILE__) . '/../../../' . str_replace('_', '/', $class) . '.php';
 
 	if (is_file($path)) {
