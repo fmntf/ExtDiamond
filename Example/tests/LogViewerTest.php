@@ -33,28 +33,31 @@ class LogViewerTest extends ExtDiamond_TestCase
 		$this->assertEquals('', $form->eventlist->getValue());
 	}
 
-	public function testSelectingADateWillLoadLogs()
+	public function testChangingADateWillReloadLogs()
 	{
 		$form = $this->getComponentByClass('logviewer');
 		$date = $form->datepicker->handleAs('DateField');
 
 		$date->pick('03-23-2010');
 		$logs = $form->eventlist->getValue();
-
-		$this->assertNotEquals('', $form->eventlist->getValue(),
-			'The logs were not loaded');
 		$this->assertTrue((bool)strstr($logs, '2010-03-23'),
 			'The logs seems to be not about the picked date');
-	}
 
-	public function testChangingADateWillReloadLogs()
-	{
-		$this->markTestIncomplete();
+		$date->pick('03-24-2010');
+		$logs = $form->eventlist->getValue();
+		$this->assertTrue((bool)strstr($logs, '2010-03-24'),
+			'The date change had no effect of logs');
 	}
 
 	public function testCanDestroyEverything()
 	{
-		$this->markTestIncomplete();
+		$form = $this->getComponentByClass('logviewer');
+		$button = $form->buttons->getArrayItemAt(0);
+
+		$this->click('css=#' . $button->id);
+
+		$this->setExpectedException('ExtDiamond_Exception_ComponentNotFound');
+		$form = $this->getComponentByClass('logviewer');
 	}
 
 }
