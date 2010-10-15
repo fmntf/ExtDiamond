@@ -58,6 +58,11 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 	 */
 	protected function getComponentByClass($class)
 	{
+		$js = "window.Ext.query('.$class')[0]";
+		if ($this->getEval($js) == 'null') {
+			throw new ExtDiamond_Exception_ComponentNotFound("Component with class '$class' not found.");
+		}
+
 		return new ExtDiamond_Proxy_ExtReference($this, ".$class");
 	}
 
