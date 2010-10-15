@@ -46,7 +46,7 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->start();
 		$this->openAndWait($this->url);
 
-		$this->injectCloner();
+		$this->injectClientCode();
 	}
 
 	/**
@@ -115,9 +115,9 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 	/**
 	 * Inject the object cloner into the test browser.
 	 */
-	private function injectCloner()
+	private function injectClientCode()
 	{
-		$js = file_get_contents(dirname(__FILE__) . '/Cloner.js');
+		$js = file_get_contents(dirname(__FILE__) . '/Client.js');
 		$this->getEval($js);
 	}
 
