@@ -1,0 +1,1 @@
+phpdoc -o HTML:frames/Extjs:default -d Proxy,Widget,Exception -f *.php -t apidocs -ti "ExtDiamond API"
