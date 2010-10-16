@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Reference to ExtJS components.
+ *
  * ExtDiamond - Easy testing for ExtJS
  * Copyright (C) 2010 Francesco Montefoschi <francesco.monte@gmail.com>
  *
@@ -18,6 +20,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @license http://www.gnu.org/licenses/gpl-3.0.html  GNU GPL 3.0
+ * @package ExtDiamond
+ * @subpackage Reference
  */
 class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 {

@@ -3,6 +3,8 @@
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 /**
+ * Basic TestCase to extend while writing tests.
+ *
  * ExtDiamond - Easy testing for ExtJS
  * Copyright (C) 2010 Francesco Montefoschi <francesco.monte@gmail.com>
  * 
@@ -20,8 +22,8 @@ require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @license http://www.gnu.org/licenses/gpl-3.0.html  GNU GPL 3.0
+ * @package ExtDiamond
  */
-
 abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
 

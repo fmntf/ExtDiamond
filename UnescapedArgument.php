@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Allows you to pass arguments to functions whitout escape them.
+ *
  * ExtDiamond - Easy testing for ExtJS
  * Copyright (C) 2010 Francesco Montefoschi <francesco.monte@gmail.com>
  *
@@ -18,8 +20,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @license http://www.gnu.org/licenses/gpl-3.0.html  GNU GPL 3.0
+ * @package ExtDiamond
  */
-
 class ExtDiamond_UnescapedArgument
 {
 	public function  __construct($value)

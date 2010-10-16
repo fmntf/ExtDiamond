@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Exception for invalid function calls.
+ *
  * ExtDiamond - Easy testing for ExtJS
  * Copyright (C) 2010 Francesco Montefoschi <francesco.monte@gmail.com>
  *
@@ -18,6 +20,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @license http://www.gnu.org/licenses/gpl-3.0.html  GNU GPL 3.0
+ * @package ExtDiamond
+ * @subpackage Exception
  */
 class ExtDiamond_Exception_Function extends Exception
 {}
