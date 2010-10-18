@@ -60,13 +60,13 @@ class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 	{
 		// search in user-defined namespaces
 		foreach ($this->selenium->getWidgetNamespaces() as $namespace) {
-			if ($this->isWidgetClass($namespace, $type)) {
+			if ($this->widgetExists($namespace, $type)) {
 				return $this->getWidgetReference($namespace, $type);
 			}
 		}
 
 		// search in ExtDiamond classes
-		if ($this->isWidgetClass('ExtDiamond_Widget_', $type)) {
+		if ($this->widgetExists('ExtDiamond_Widget_', $type)) {
 			return $this->getWidgetReference('ExtDiamond_Widget_', $type);
 		}
 
@@ -81,7 +81,7 @@ class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 	 * @param string $widget
 	 * @return bool
 	 */
-	protected function isWidgetClass($namespace, $widget)
+	protected function widgetExists($namespace, $widget)
 	{
 		$class = $namespace . $widget . 'Reference';
 		return class_exists($class);
