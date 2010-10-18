@@ -38,11 +38,27 @@ class WidgetNamespacesTest extends Vendor_TestCase
 
 	protected $url = 'http://extdiamond.local/firewall.html';
 
-	public function testWindowHasTheDesiredStructure()
+	public function testCanUseExternalComponents()
 	{
 		$window = $this->getComponentByClass('firewall-window')->handleAs('ExampleComponent');
 
 		$this->assertInstanceOf('Vendor_Widget_ExampleComponentReference', $window);
+	}
+
+	public function testUsesDefaultComponents()
+	{
+		$window = $this->getComponentByClass('firewall-window')->handleAs('Grid');
+
+		$this->assertInstanceOf('ExtDiamond_Widget_GridReference', $window);
+	}
+
+	public function testCannotUseUnexistingExternalComponents()
+	{
+		try {
+			$window = $this->getComponentByClass('firewall-window')->handleAs('Dummy');
+			$this->fail('We expected an exception to be thrown.');
+		} catch (ExtDiamond_Exception_WidgetNotFound $e) {
+		}
 	}
 
 }
