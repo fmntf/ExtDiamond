@@ -62,13 +62,46 @@ class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 	 */
 	public function handleAs($type)
 	{
-		$class = 'ExtDiamond_Widget_' . $type . 'Reference';
-
-		if (class_exists($class)) {
-			return new $class($this->selenium, '#' . $this->id);
+		// search in user-defined namespaces
+		foreach ($this->selenium->getWidgetNamespaces() as $namespace) {
+			if ($this->widgetExists($namespace, $type)) {
+				return $this->getWidgetReference($namespace, $type);
+			}
 		}
 
+		// search in ExtDiamond classes
+		if ($this->widgetExists('ExtDiamond_Widget_', $type)) {
+			return $this->getWidgetReference('ExtDiamond_Widget_', $type);
+		}
+
+		// nothing found
 		throw new ExtDiamond_Exception_WidgetNotFound("Widget `$type` not found.");
+	}
+
+	/**
+	 * Check if the namespace has the given widget.
+	 *
+	 * @param string $namespace
+	 * @param string $widget
+	 * @return bool
+	 */
+	protected function widgetExists($namespace, $widget)
+	{
+		$class = $namespace . $widget . 'Reference';
+		return class_exists($class);
+	}
+
+	/**
+	 * Gets a reference of a widget in the given namespace.
+	 * 
+	 * @param string $namespace
+	 * @param string $widget
+	 * @return ExtDiamond_Proxy_JsReference
+	 */
+	protected function getWidgetReference($namespace, $widget)
+	{
+		$class = $namespace . $widget . 'Reference';
+		return new $class($this->selenium, '#' . $this->id);
 	}
 
 }
