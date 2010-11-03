@@ -51,7 +51,7 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 
 		$this->setBrowser('*googlechrome');
-        $this->setBrowserUrl($this->url);
+		$this->setBrowserUrl($this->url);
 		$this->start();
 		$this->openAndWait($this->url);
 
@@ -129,7 +129,7 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 	/**
 	 * Inject the object cloner into the test browser.
 	 */
-	private function injectClientCode()
+	protected function injectClientCode()
 	{
 		$js = file_get_contents(dirname(__FILE__) . '/Client.js');
 		$this->getEval($js);
