@@ -88,7 +88,7 @@ class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 	protected function widgetExists($namespace, $widget)
 	{
 		$class = $namespace . $widget . 'Reference';
-		return class_exists($class);
+		return @class_exists($class);
 	}
 
 	/**
