@@ -53,7 +53,7 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->setBrowser('*googlechrome');
 		$this->setBrowserUrl($this->url);
 		$this->start();
-		$this->openAndWait($this->url);
+		$this->open($this->url);
 
 		$this->injectClientCode();
 	}
@@ -106,6 +106,21 @@ abstract class ExtDiamond_TestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function waitForever()
 	{
 		$this->waitForCondition("false", 30000000);
+	}
+
+	/**
+	 * Waits untile the specified element is not available in the DOM.
+	 * When it is available, clicks it.
+	 *
+	 * @param string $locator
+	 * @return ExtDiamond_TestCase
+	 */
+	protected function clickWhenPresent($locator)
+	{
+		$this->waitForElementPresent($locator);
+		$this->click($locator);
+
+		return $this;
 	}
 
 	/**
