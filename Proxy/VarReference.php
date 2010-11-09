@@ -23,7 +23,7 @@
  * @package ExtDiamond
  * @subpackage Reference
  */
-class ExtDiamond_Proxy_VarReference extends ExtDiamond_Proxy_Reference
+class ExtDiamond_Proxy_VarReference extends ExtDiamond_Proxy_Castable
 {
 
 	protected function getPath()

@@ -23,7 +23,7 @@
  * @package ExtDiamond
  * @subpackage Reference
  */
-class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
+class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Castable
 {
 
 	protected function getPath()
@@ -47,61 +47,6 @@ class ExtDiamond_Proxy_ExtReference extends ExtDiamond_Proxy_Reference
 	{
 		$class = get_class($this);
 		return new $class($this->selenium, $this->startPoint, $this->getNextPath("items.items[$i]"));
-	}
-
-	/**
-	 * Reference converter
-	 *
-	 * It 'casts' the object into a more specified widget-related class.
-	 * Please note that there are no checks about what you cast: you can
-	 * transform a window into a grid getting errors!
-	 *
-	 * @remember Switch the brain on before the use.
-	 * @param string $type
-	 * @return ExtDiamond_Proxy_JsReference
-	 */
-	public function handleAs($type)
-	{
-		// search in user-defined namespaces
-		foreach ($this->selenium->getWidgetNamespaces() as $namespace) {
-			if ($this->widgetExists($namespace, $type)) {
-				return $this->getWidgetReference($namespace, $type);
-			}
-		}
-
-		// search in ExtDiamond classes
-		if ($this->widgetExists('ExtDiamond_Widget_', $type)) {
-			return $this->getWidgetReference('ExtDiamond_Widget_', $type);
-		}
-
-		// nothing found
-		throw new ExtDiamond_Exception_WidgetNotFound("Widget `$type` not found.");
-	}
-
-	/**
-	 * Check if the namespace has the given widget.
-	 *
-	 * @param string $namespace
-	 * @param string $widget
-	 * @return bool
-	 */
-	protected function widgetExists($namespace, $widget)
-	{
-		$class = $namespace . $widget . 'Reference';
-		return @class_exists($class);
-	}
-
-	/**
-	 * Gets a reference of a widget in the given namespace.
-	 * 
-	 * @param string $namespace
-	 * @param string $widget
-	 * @return ExtDiamond_Proxy_JsReference
-	 */
-	protected function getWidgetReference($namespace, $widget)
-	{
-		$class = $namespace . $widget . 'Reference';
-		return new $class($this->selenium, '#' . $this->id);
 	}
 
 }
