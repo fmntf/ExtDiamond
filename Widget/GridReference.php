@@ -32,11 +32,14 @@ class ExtDiamond_Widget_GridReference extends ExtDiamond_Proxy_ExtReference
 	 * just don't use this!
 	 *
 	 * @param int $timeout [ms]
+	 * @return ExtDiamond_Widget_GridReference
 	 */
 	public function waitForMetaData($timeout = 10000)
 	{
 		$condition = "window.Ext.getCmp('{$this->getProperty('id')}').hasMeta";
 		$this->selenium->waitForCondition($condition, $timeout);
+
+		return $this;
 	}
 
 	/**
@@ -53,6 +56,20 @@ class ExtDiamond_Widget_GridReference extends ExtDiamond_Proxy_ExtReference
 		$id = $this->selenium->getEval($js);
 
 		return new ExtDiamond_Widget_GridRowReference($this->selenium, '#' . $id);
+	}
+
+	/**
+	 * Checks if the grid has the given column.
+	 *
+	 * @param string $name
+	 * @return ExtDiamond_Widget_GridReference
+	 */
+	public function assertHasColumn($name)
+	{
+		$index = $this->colModel->findColumnIndex($name);
+		$this->selenium->assertTrue($index != -1, "Column '$name' not found in the grid.");
+
+		return $this;
 	}
 
 }
